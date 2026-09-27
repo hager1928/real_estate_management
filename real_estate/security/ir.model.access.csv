@@ -1,2 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_real_estate_real_estate,real_estate.real_estate,model_real_estate_real_estate,base.group_user,1,1,1,1
+access_property_manager,property.manager,model_real_estate_property,,1,1,1,1
+access_tenant_manager,tenant.manager,model_real_estate_tenant,group_tenant_manager,1,1,1,1
+access_tenant,tenant,model_real_estate_tenant,group_tenant,1,1,0,0
+access_lease_manager,lease.manager,model_real_estate_lease,group_lease_manager,1,1,1,1
+access_lease,lease,model_real_estate_lease,group_lease,1,1,0,1
+access_maintenance_request_manager,maintenance_request.manager,model_maintenance_request,,1,1,1,1
+access_maintenance_request_manager,maintenance_request.manager,model_maintenance_request,group_maintenance_request_manager,1,1,1,1
+access_maintenance_request,maintenance_request,model_maintenance_request,group_maintenance_request,1,1,0,0
+access_maintenance_request_wizard,maintenance.request.wizard,model_maintenance_request_wizard,,1,1,1,1
+access_lease_wizard,lease.wizard,model_lease_wizard,,1,1,1,1
+access_real_estate_tenant_wizard,real_estate_tenant.wizard,model_real_estate_tenant_wizard,,1,1,1,1
+access_lease_payment_manager,lease_payment.manager,model_lease_payment,,1,1,1,1

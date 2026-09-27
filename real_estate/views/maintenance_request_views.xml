@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- maintenance List View (Tree) -->
+    <record id="view_maintenance_request_tree" model="ir.ui.view">
+        <field name="name">maintenance.request.tree</field>
+        <field name="model">maintenance.request</field> 
+        <field name="arch" type="xml">
+            <tree string="Maintenance Requests">
+                <field name="name"/>
+                <field name="property_id"/>
+                <field name="tenant_id"/>
+                <field name="lease_id"/>
+                <field name="assigned_to"/>
+                <field name="scheduled_date"/>
+                <field name="completion_date"/>
+                <field name="actual_cost"/>
+                <field name="issue_type"/> 
+                <field name="urgency"/> 
+            </tree>
+        </field>
+    </record>
+
+    <!-- Maintenance Form View -->
+    <record id="view_maintenance_request_form" model="ir.ui.view">
+        <field name="name">maintenance.request.form</field>
+        <field name="model">maintenance.request</field> <!-- Fixed: used dot instead of underscore -->
+        <field name="arch" type="xml">
+            <form string="Maintenance Request">
+            <header>
+                    <field name="state" widget="statusbar" statusbar_visible="submitted,cancelled"/>
+            </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Maintenance Request"/>                 
+                        </h1>
+                    </div>
+                    <group string="Maintenance Details">
+                        <group string="Maintenance Infos">
+                            <field name="property_id"/>
+                            <field name="tenant_id"/>
+                            <field name="lease_id"/>
+                            <field name="assigned_to"/>
+                            <field name="scheduled_date"/>
+                            <field name="completion_date"/>
+                            <field name="actual_cost"/>
+                            <field name="issue_type"/> 
+                            <field name="urgency"/>   
+                            <field name="preferred_date"/>
+                            <field name="tenant_phone"/>
+                            <field name="state"/>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+        <!-- cron job -->
+    <record id="ir_cron_auto_scheduled_date" model="ir.cron">
+        <field name="name">Real Estate: Auto Scheduled date</field>
+        <field name="model_id" ref="model_maintenance_request"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_auto_scheduled_date()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+
+
+    <!-- _cron_auto_next_maintenance_reminder_date -->
+    <record id="ir_cron_auto_next_maintenance_reminder_date" model="ir.cron">
+        <field name="name">Real Estate: Auto Next Maintenance Reminder Date</field>
+        <field name="model_id" ref="model_maintenance_request"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_auto_next_maintenance_reminder_date()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="active" eval="True"/>
+    </record>
+
+
+    <record id="action_maintaince" model="ir.actions.act_window">
+        <field name="name">Maintenance Requests</field>
+        <field name="res_model">maintenance.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

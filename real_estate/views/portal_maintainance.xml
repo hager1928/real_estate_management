@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- card -->
+<odoo>
+    <template id="portal_my_maintenances" name="Maintenace Portal - My Maintenance">
+        <t t-call="portal.portal_layout">
+            <div class="container mt16 o_portal_portlets">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="breadcrumb" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/my/home">My Account</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">My Maintenance</li>
+                            </ol>
+                        </nav>
+                        <h1 class="mb16">My Maintenace</h1>
+                        <t t-if="maintenances">
+                            <p>
+                                Hello <strong><t t-esc="request.env.user.name"/></strong>. Below are the Maintenance linked to your account.
+                            </p>
+                        </t>
+                        <t t-else="">
+                            <div class="alert alert-warning" role="alert">
+                                No maintenance record is linked to your user account. Please contact your property manager to enable portal access.
+                            </div>
+                        </t>
+                    </div>
+                </div>
+                <t t-if="maintenances">
+                    <div class="row">
+                        <t t-foreach="maintenances" t-as="maintenance">
+                            <div class="col-md-6 mb16">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <h5 class="card-title mb-2">
+                                            <t t-esc="maintenance.assigned_to.name"/>
+                                        </h5>
+                                        <p class="text-muted mb-2">
+                                            <strong>Maintaince:</strong> <t t-esc="maintenance.name"/>
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>Issue type:</strong>
+                                            <t t-esc="maintenance.issue_type or 'N/A'"/>
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>Scdeule date:</strong>
+                                            <t t-esc="maintenance.scheduled_date"/>
+                                        </p>
+                                        <p class="mb-1">
+                                            <strong>tenant_phone:</strong>
+                                            <t t-esc="maintenance.tenant_phone"/>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-if="not maintenances">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-info" role="alert">
+                                No maintenance were found for your account.
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_my_maintenances_menu" name="Portal My Home: My Maintenance" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="before">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+        <div id="portal_service_category" position="inside">
+            <t>
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'fa fa-home'"/>
+                    <t t-set="title">My Maintainces Requests</t>
+                    <t t-set="text">View your current Maintaince details.</t>
+                    <t t-set="url" t-value="'/my/maintenances'"/>
+                    <t t-set="config_card" t-value="True"/>
+                    <t t-set="placeholder_count" t-value="'maintenance_count'"/>
+                </t>
+            </t>
+        </div>
+    </template>
+</odoo>
