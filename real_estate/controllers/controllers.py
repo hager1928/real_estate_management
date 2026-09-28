@@ -41,3 +41,4 @@ class RealEstatePortal(CustomerPortal): #inherit odoo's CustomerPortal controlle
         })
         return request.render('real_estate.portal_my_leases', values)
 
+    

@@ -33,7 +33,8 @@ class Property(models.Model):
         # ondelete='cascade',  # If property deleted, delete lease too
         # index=True
     )
-    
+    payment_ids = fields.One2many('lease.payment', 'property_id', string='Payments')
+
     def mark_as_occupied(self):
         """Mark property as no longer available"""
         for record in self:
@@ -115,3 +116,13 @@ class Property(models.Model):
         """Print Property Summary Report"""
         self.ensure_one()
         return self.env.ref('real_estate.action_report_property_summary').report_action(self)
+
+    def action_export_excel(self):
+        return {
+            'type': 'ir.actions.act_url',
+            'url': f'/real_estate/property/excel_export/{self.id}',
+            'target': 'self',
+        }
+
+
+
