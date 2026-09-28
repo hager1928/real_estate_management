@@ -10,7 +10,7 @@ class Lease(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
         
     name = fields.Char(string='Lease Reference', required=True, default='New')
-    #name = fields.Char(string='Lease Reference', required=True, readonly=True, default='New')
+    image_1920 = fields.Image(string='Property Photo', max_width=1920, max_height=1920)
     property_id = fields.Many2one(
         'real_estate.property',
         string='Property',

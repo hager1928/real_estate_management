@@ -33,6 +33,7 @@ class Property(models.Model):
         # ondelete='cascade',  # If property deleted, delete lease too
         # index=True
     )
+    
     def mark_as_occupied(self):
         """Mark property as no longer available"""
         for record in self:
@@ -110,3 +111,7 @@ class Property(models.Model):
                 'target': 'current',
             }
 
+    def action_print_property_summary(self):
+        """Print Property Summary Report"""
+        self.ensure_one()
+        return self.env.ref('real_estate.action_report_property_summary').report_action(self)

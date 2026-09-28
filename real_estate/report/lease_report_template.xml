@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- =========================================================
+         LEASE SUMMARY REPORT
+         ========================================================= -->
+
+    <template id="report_lease_summary">
+
+        <!-- Standard Odoo PDF container -->
+        <t t-call="web.html_container">
+
+            <!--
+                docs = the lease records returned by Python
+
+                t-foreach = loop through every selected lease
+                t-as="lease" = call the current lease "lease"
+            -->
+            <t t-foreach="docs" t-as="lease">
+
+                <!-- Standard Odoo external report layout -->
+                <t t-call="web.external_layout">
+
+                    <div class="page">
+
+                        <!-- ==============================
+                             REPORT HEADER
+                             ============================== -->
+
+                        <h2>
+                            Lease Summary
+                        </h2>
+
+
+                        <!-- ==============================
+                             LEASE INFORMATION
+                             ============================== -->
+
+                        <h3>Lease Information</h3>
+
+                        <table class="table table-sm table-bordered">
+
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <strong>Lease</strong>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="lease.name"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <strong>Tenant</strong>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="lease.tenant_id"/>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <strong>Property</strong>
+                                    </td>
+
+                                    <td>
+                                        <span t-field="lease.property_id"/>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ==============================
+                             MAINTENANCE REQUESTS
+                             ============================== -->
+
+                        <h3>Maintenance Requests</h3>
+
+                        <!--
+                            maintenance_requests is a Python dictionary.
+
+                            Example:
+
+                            {
+                                10: ["Broken door", "AC repair"],
+                                11: ["Plumbing problem"]
+                            }
+
+                            We use lease.id to get the requests
+                            belonging to this lease.
+                        -->
+
+                        <t t-if="maintenance_requests.get(lease.id)">
+
+                            <ul>
+
+                                <t t-foreach="maintenance_requests.get(lease.id)"
+                                   t-as="maintenance">
+
+                                    <li>
+                                        <span t-esc="maintenance"/>
+                                    </li>
+
+                                </t>
+
+                            </ul>
+
+                        </t>
+
+                        <t t-else="">
+
+                            <p>
+                                No maintenance requests found.
+                            </p>
+
+                        </t>
+
+
+                        <!-- ==============================
+                             MAINTENANCE COST
+                             ============================== -->
+
+                        <h3>Maintenance Cost</h3>
+
+                        <table class="table table-sm table-bordered">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>
+                                        <strong>Total Maintenance Cost</strong>
+                                    </td>
+
+                                    <td class="text-end">
+
+                                        <span t-esc="maintenance_costs.get(lease.id, 0)"/>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+
+                </t>
+
+            </t>
+
+        </t>
+
+    </template>
+</odoo>

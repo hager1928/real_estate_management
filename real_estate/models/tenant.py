@@ -29,7 +29,9 @@ class Tenant(models.Model):
             ('villa', 'Villa'),
             ('commercial', 'Commercial'),
         ], string='Property Type', required=True) 
-
+    company_type = fields.Selection(string='Company Type',
+            selection=[('person', 'Individual'), ('company', 'Company')],default='person', required=True)
+    
     def update_notes(self):
         """You can update notes here"""
         for record in self:
@@ -78,3 +80,4 @@ class Tenant(models.Model):
             })
 
             tenant.user_id = user.id
+
