@@ -11,7 +11,7 @@ class Property(models.Model):
     price = fields.Float(string='Monthly Rent', required=True) 
     deposit = fields.Float(string='Deposit Amount')      
     bedrooms = fields.Integer(string='Bedrooms')
-    available = fields.Boolean(string='Available', default=True, index=True)    
+    available = fields.Boolean(string='Available', default=True ,default=lambda self:self.env.user, index=True)    
     agent_id = fields.Many2one('res.users', string='Sales Person')
     property_type = fields.Selection([
         ('apartment', 'Apartment'),      #1st is what appears in db, 2nd is how it would appear to users
@@ -35,6 +35,14 @@ class Property(models.Model):
     )
     payment_ids = fields.One2many('lease.payment', 'property_id', string='Payments')
 
+    # tenant_ids = fields.One2many(
+    #         'real_estate.tenant','property_id',
+    #         string='Tenants',
+    #         # required=True,
+    #         # ondelete='cascade',  # If property deleted, delete lease too
+    #         # index=True
+    #     )
+    
     def mark_as_occupied(self):
         """Mark property as no longer available"""
         for record in self:
