@@ -38,4 +38,21 @@
               action="action_payment"
               sequence="50"/>
               
+        <!-- Reports Menu -->
+    <menuitem id="menu_real_estate_reports"
+              name="Reporting"
+              parent="menu_real_estate_root"
+              sequence="60"/>
+    <!-- Add to menu SUB MENU TO REPORTS -->
+    <menuitem id="menu_rent_roll_report"
+              name="Rent Roll Report"
+              parent="menu_real_estate_reports"
+              action="action_rent_roll_wizard"
+              sequence="10"/>
+              <!-- sub menu for maintaince report -->
+     <menuitem id="menu_maintaince_report"
+              name="Maintaince Report"
+              parent="menu_real_estate_reports"
+              action="action_maintenance_report_wizard"
+              sequence="20"/>
 </odoo>

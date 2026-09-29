@@ -33,6 +33,8 @@ Long description of module's purpose
         'wizard/tenant.xml',
         'wizard/maintenance.xml',
         'wizard/lease.xml',
+        'wizard/rent_roll_wizard_views.xml',
+        'wizard/maintenance_wizard.xml',
         'report/report.xml',
         'report/property_report_template.xml',
         'report/lease_report_template.xml',

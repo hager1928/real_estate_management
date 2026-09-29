@@ -27,7 +27,7 @@ class RealEstateController(http.Controller):
         # Define formats
         header_format = workbook.add_format({
             'bold': True,
-            'bg_color': '#4472C4',
+            'bg_color': "#F375C3",
             'font_color': 'white',
             'border': 1,
             'align': 'center',
