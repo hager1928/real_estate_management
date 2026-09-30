@@ -1,7 +1,7 @@
 import json
 import requests
 
-url = 'http://localhost:8017'
+url = 'http://localhost:8030'
 db = 'test17'
 username = 'admin'
 password = 'admin'

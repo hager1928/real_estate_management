@@ -28,7 +28,7 @@ class Tenant(models.Model):
             ('house', 'House'),
             ('villa', 'Villa'),
             ('commercial', 'Commercial'),
-        ], string='Property Type', required=True) 
+        ], string='Property Type') 
     company_type = fields.Selection(string='Company Type',
             selection=[('person', 'Individual'), ('company', 'Company')],default='person', required=True)
     
