@@ -54,6 +54,8 @@
                             <field name="age_category" invisible="company_type == 'company'"/>
                             <field name="user_id"/>
                             <field name="property_type"/>
+                            <field name="tenant_api" widget="radio" options="{'horizontal': True}"/>
+                            
                         </group>
                     </group>
                     <group>
@@ -123,6 +125,7 @@
                 <separator/>
                 <filter string="Active" name="active" domain="[('active', '=', True)]"/>
                 <filter string="Inactive" name="inactive" domain="[('active', '=', False)]"/>
+                <filter string="API" name="api" domain="[('tenant_api', '=', 'API')]"/>
                 <separator/>
                 <group expand="0" string="Group By">
                     <filter string="Active" name="group_by_active" context="{'group_by': 'active'}"/>

@@ -27,7 +27,7 @@ class Lease(models.Model):
     )
     start_date = fields.Date(string='Start Date', required=True)
     end_date = fields.Date(string='End Date', required=True)
-    monthly_rent = fields.Float(string='Monthly Rent', required=True)
+    monthly_rent = fields.Float(string='Monthly Rent', required=0)
     deposit_paid = fields.Float(string='Deposit Paid')
     state = fields.Selection([
         ('draft', 'Draft'),

@@ -19,12 +19,15 @@ class CrmLead(models.Model):
         # if 'active' in vals and vals['active'] == True:
         # print("name:", vals.get('name'))
         # vals['description'] = vals.get('name')
-        if vals.get('expected_revenue') > 5000:
-            vals['description'] = f"Expected Revenue: {vals['expected_revenue']}"
-        else:
-            raise UserError("Expected Revenue must be greater than 5000")
+        if 'expected_revenue' in vals:
+            expected_revenue = float(vals['expected_revenue'] or 0)
+            if expected_revenue > 5000:
+                vals['description'] = f"Expected Revenue: {expected_revenue}"
+            else:
+                raise UserError("Expected Revenue must be greater than 5000")
         # vals['description'] = self.name
         return super(CrmLead, self).write(vals)
+        
 
 # loop crm , property_type exist? ===>, create new tenant At 1 am
     @api.model

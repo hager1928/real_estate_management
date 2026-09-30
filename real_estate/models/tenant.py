@@ -30,8 +30,9 @@ class Tenant(models.Model):
             ('commercial', 'Commercial'),
         ], string='Property Type') 
     company_type = fields.Selection(string='Company Type',
-            selection=[('person', 'Individual'), ('company', 'Company')],default='person', required=True)
-    
+            selection=[('person', 'Individual'), ('company', 'Company')],default='person', required=0)
+    tenant_api= fields.Selection(string='Tenant API',
+            selection=[('person', 'Individual'), ('api', 'API')],default='person', required=0)
     def update_notes(self):
         """You can update notes here"""
         for record in self:

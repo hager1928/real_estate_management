@@ -6,3 +6,4 @@ from . import contollers_prop
 from . import website
 from . import excel_controller
 from . import api
+from . import http_api
