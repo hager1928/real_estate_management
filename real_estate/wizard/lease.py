@@ -1,6 +1,6 @@
 from odoo import models, fields, api
 
-class LeaseWizard(models.Model):
+class LeaseWizard(models.TransientModel):
     _name = 'lease.wizard'
     _description = 'Property Lease Wizard'
     

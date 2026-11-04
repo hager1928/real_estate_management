@@ -92,6 +92,8 @@ class Lease(models.Model):
                         """Convert State To Cancelled """
                         for record in self:
                             record.write({'state': 'cancelled'})
+
+ #to create sequence for lease reference                           
     @api.model
     def create(self, vals):
         """Override create to generate lease reference"""

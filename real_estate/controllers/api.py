@@ -4,6 +4,20 @@ from odoo.http import request
 import json
 from functools import wraps
 
+def valid_response(data=None, message='Success', status=200):
+    return request.make_json_response({
+        'status': 'success',
+        'message': message,
+        'data': data
+    }, status=status)
+
+
+def invalid_response(message='Bad Request', status=400, data=None):
+    return request.make_json_response({
+        'status': 'error',
+        'message': message,
+        'data': data
+    }, status=status)
 
 TOKEN = 'cacb064fd72c08b445959768'
 class RealEstateAPI(http.Controller):
@@ -434,3 +448,37 @@ class RealEstateAPI(http.Controller):
                 'status': 'error',
                 'message': str(e)
             }
+#########check with api key instead of token ########
+    @http.route(
+            '/api/check_api_key',
+            type='http',
+            auth='none',
+            methods=['GET'],
+            csrf=False
+        )
+    def check_api_key(self):
+
+            api_key = request.httprequest.headers.get(
+                'Authorization',
+                ''
+            )
+
+            api_key = api_key.replace('Bearer ', '').strip()
+
+            user_id = request.env['res.users.apikeys']._check_credentials(
+                scope='rpc',
+                key=api_key
+            )
+
+            if not user_id:
+                return invalid_response(
+                    message='Invalid API Key',
+                    status=401
+                )
+
+            return valid_response(
+                message='Valid API Key',
+                data={
+                    'user_id': user_id
+                }
+            )

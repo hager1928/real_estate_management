@@ -4,7 +4,6 @@ access_tenant_manager,tenant.manager,model_real_estate_tenant,group_tenant_manag
 access_tenant,tenant,model_real_estate_tenant,group_tenant,1,1,0,0
 access_lease_manager,lease.manager,model_real_estate_lease,group_lease_manager,1,1,1,1
 access_lease,lease,model_real_estate_lease,group_lease,1,1,0,1
-access_maintenance_request_manager,maintenance_request.manager,model_maintenance_request,,1,1,1,1
 access_maintenance_request_manager,maintenance_request.manager,model_maintenance_request,group_maintenance_request_manager,1,1,1,1
 access_maintenance_request,maintenance_request,model_maintenance_request,group_maintenance_request,1,1,0,0
 access_maintenance_request_wizard,maintenance.request.wizard,model_maintenance_request_wizard,,1,1,1,1
