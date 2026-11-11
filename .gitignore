@@ -5,3 +5,11 @@ __pycache__/
 *.swp
 .idea/
 .vscode/
+# External Odoo modules
+sequence_opportunity_crm/
+
+# Local configuration
+Odoo_17.conf
+
+# Temporary test files
+test.txt
