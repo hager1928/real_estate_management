@@ -33,6 +33,15 @@
             <field name="name">Maintenance Request</field>
     </record>
 
+    <record id="base.group_system" model="res.groups">
+        <field name="implied_ids" eval="[
+            (4, ref('group_property_manager')),
+            (4, ref('group_tenant_manager')),
+            (4, ref('group_lease_manager')),
+            (4, ref('group_maintenance_request_manager')),
+        ]"/>
+    </record>
+
     <record id="property_agent_rule" model="ir.rule">
         <field name="name">Agent: Own Properties Only</field>
         <field name="model_id" ref="model_real_estate_property"/>
@@ -46,13 +55,6 @@
         <field name="domain_force">[('user_id', '=', user.id)]</field> 
         <field name="groups" eval="[(4, ref('group_tenant'))]"/>
     </record>
-
-    <!-- <record id="property_tenant_rule" model="ir.rule">
-        <field name="name">Tenant: Leased Properties Only</field>
-        <field name="model_id" ref="model_real_estate_property"/>
-        <field name="domain_force">[('lease_ids.tenant_id.user_id', '=', user.id)]</field>
-        <field name="groups" eval="[(4, ref('group_tenant'))]"/>
-    </record> -->
 
     <record id="property_manager_rule" model="ir.rule">
         <field name="name">Manager: All Properties</field>
